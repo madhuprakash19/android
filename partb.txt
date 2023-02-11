@@ -1,0 +1,328 @@
+void main(){
+  runApp(MaterialApp(
+    home:Text(
+      "This is a test",
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Colors.red,
+        fontSize: 30,
+      ),
+    )
+
+  ));
+}
+
+void main(){
+  runApp(MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: Text("title"),
+      ),
+      body: Text("This is a text"),
+    ),
+  ));
+}
+
+void main(){
+  runApp(MaterialApp(
+    home: SafeArea(
+      child: Text(
+        'This is text',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Colors.red,
+          fontSize: 30,
+        ),
+      ),
+    ),
+  ));
+}
+
+
+void main(){
+  runApp(MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: Text("This is a Title")
+      ),
+      body: func(),
+    ),
+  ));
+}
+
+class func extends StatelessWidget {
+  const func({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          height: 100,
+          width: 100,
+          color: Colors.red,
+          child: Text("First"),
+        ),
+        Container(
+          height: 100,
+          width: 100,
+          color: Colors.yellow,
+          child: Text("Second"),
+        ),
+        Container(
+          height: 100,
+          width: 100,
+          color: Colors.blue,
+          child: Text("Third"),
+        ),
+      ],
+    );
+  }
+}
+
+
+
+void main(){
+  runApp(MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: Text("Dice Roll"),
+      ),
+      body: func(),
+    ),
+  ));
+}
+
+class func extends StatefulWidget {
+  const func({Key? key}) : super(key: key);
+
+  @override
+  State<func> createState() => _funcState();
+}
+
+class _funcState extends State<func> {
+  int left = 1;
+  int right = 1;
+  void changeFace(){
+    setState(() {
+      left = Random().nextInt(6)+1;
+      right = Random().nextInt(6)+1;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        children: [
+          Expanded(child: TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.red,
+            ),
+            child: Image.asset('images/dice$left.png'),
+            onPressed: (){
+              changeFace();
+            },
+          )),
+          Expanded(child: TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.blue,
+            ),
+            child: Image.asset('images/dice$right.png'),
+            onPressed: (){
+              changeFace();
+            },
+          ))
+        ],
+      ),
+    );
+  }
+}
+
+
+void main(){
+  runApp(MaterialApp(
+    home: Scaffold(
+     appBar: AppBar(
+       title: Text("Xylophone"),
+       centerTitle: true,
+     ),
+     body: xylo(),
+    ),
+  ));
+}
+
+
+
+class xylo extends StatefulWidget {
+  const xylo({Key? key}) : super(key: key);
+
+  @override
+  State<xylo> createState() => _xyloState();
+}
+
+class _xyloState extends State<xylo> {
+  void play(int i) async{
+    AudioPlayer player = AudioPlayer();
+    String name = 'assets/note$i.wav';
+    ByteData data = await rootBundle.load(name);
+    Uint8List audio = data.buffer.asUint8List(data.offsetInBytes,data.lengthInBytes);
+    int res = await player.playBytes(audio);
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(child:TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.red,
+          ), onPressed: () {
+            play(1);
+        }, child: Text("First"),
+        )
+        ),
+        Expanded(child:TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.blue,
+          ), onPressed: () {
+          play(2);
+        }, child: Text("First"),
+        )
+        ),
+        Expanded(child:TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.green,
+          ), onPressed: () {
+          play(3);
+        }, child: Text("First"),
+        )
+        ),
+        Expanded(child:TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.orange,
+          ), onPressed: () {
+          play(4);
+        }, child: Text("First"),
+        )
+        ),
+        Expanded(child:TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.purple,
+          ), onPressed: () {
+          play(5);
+        }, child: Text("First"),
+        )
+        ),
+        Expanded(child:TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.pinkAccent,
+          ), onPressed: () {
+          play(6);
+        }, child: Text("First"),
+        )
+        ),
+        Expanded(child:TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.tealAccent,
+          ), onPressed: () {
+          play(7);
+        }, child: const Text("First"),
+        )
+        ),
+      ],
+    );
+  }
+}
+
+void main(){
+  runApp(MaterialApp(
+    home: SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Quizz app"),
+        ),
+        body: quizz(),
+      ),
+    ),
+  ));
+}
+
+class Question{
+  final String qn;
+  final bool ans;
+  Question({
+    required this.qn,
+    required this.ans
+});
+}
+
+class Questions{
+  List <Question> bank = [
+    Question(qn: "hi", ans:true),
+    Question(qn: "hii", ans:true),
+    Question(qn: "hiii", ans:false),
+    Question(qn: "hiiii", ans:false),
+    Question(qn: "hiiiii", ans:true),
+  ];
+}
+
+
+
+class quizz extends StatefulWidget {
+  const quizz({Key? key}) : super(key: key);
+
+  @override
+  State<quizz> createState() => _quizzState();
+}
+
+class _quizzState extends State<quizz> {
+  int questionNumber = 0;
+  int currentScore = 0;
+  Questions questions = Questions();
+
+  void updatequestionnum(){
+    setState(() {
+      questionNumber++;
+    });
+  }
+
+  void updatecurrentscore(bool choice,int qn){
+    if(questions.bank.length>qn){
+      if(questions.bank[qn].ans == choice){
+        setState(() {
+          currentScore++;
+        });
+      }
+    }
+  }
+
+  check(int qn){
+    return qn < questions.bank.length ? true: false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          check(questionNumber)?
+              questions.bank[questionNumber].qn.toString():"End"
+        ),
+        if(check(questionNumber))
+          ElevatedButton(onPressed: (){
+            updatecurrentscore(true, questionNumber);
+            updatequestionnum();
+          }, child: Text("True")),
+        if(check(questionNumber))
+          ElevatedButton(onPressed: (){
+            updatecurrentscore(false, questionNumber);
+            updatequestionnum();
+          }, child: Text("False")),
+        Text("Current Score is $currentScore")
+      ],
+    );
+  }
+}

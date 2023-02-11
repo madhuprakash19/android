@@ -1,0 +1,51 @@
+Frequently forgot
+
+
+Intent Explicit:
+Intent it = new Intent(MainActivity.this,two.class);
+Bundle b =new Bundle();
+b.putString("name",name.getText().toString());
+it.putExtras(b);
+startActivity(it);
+
+getIntent().getStringExtra("name");
+
+
+calculator:
+String[] tabs = val.split("\\+|-|\\/|\\*|\\%");
+        double a1 =  Double.parseDouble(tabs[0]);
+        double a2 =  Double.parseDouble(tabs[1]);
+
+ case R.id.equals: res = calculate(ans.getText().toString(),op);
+            ans.setText(String.valueOf(res));
+
+tv.setText(getIntent().getStringExtra("name"));
+
+Intent Implicit:
+Uri u = Uri.parse("tel:"+phn.getText().toString());
+Intent i = new Intent(Intent.ACTION_DIAL,u);
+startActivity(i);
+
+Image Fliper
+iv.setImageResource(R.drawable.two);
+
+Alert
+AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+AlertDialog alertDialog = alert.create();
+alertDialog.show();
+
+
+
+ArrayAdapter<String> a = new ArrayAdapter<String>(this,R.layout.textview,countrylist);
+mylist.setAdapter(a);
+
+
+
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
